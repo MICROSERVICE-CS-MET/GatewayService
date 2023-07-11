@@ -24,4 +24,7 @@ spring:
   application:
     name: gateway-service
 
+  banner:
+    location: banner.txt
+
 

@@ -1,0 +1,27 @@
+server:
+  port: 9090
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: book-service
+          uri: http://localhost:3030
+          predicates:
+            - Path=/books/**
+        - id: order-service
+          uri: http://localhost:4040
+          predicates:
+            - Path=/orders/**
+        - id: cart-service
+          uri: http://localhost:5050
+          predicates:
+            - Path=/carts/**
+        - id: customer-service
+          uri: http://localhost:6060
+          predicates:
+            - Path=/customers/**
+  application:
+    name: gateway-service
+
+

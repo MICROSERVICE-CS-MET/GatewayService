@@ -1,24 +1,28 @@
 server:
   port: 9090
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
 
 spring:
   cloud:
     gateway:
       routes:
         - id: book-service
-          uri: http://localhost:3030
+          uri: lb://book-service
           predicates:
             - Path=/books/**
         - id: order-service
-          uri: http://localhost:4040
+          uri: lb://order-service
           predicates:
             - Path=/orders/**
         - id: cart-service
-          uri: http://localhost:5050
+          uri: lb://cart-service
           predicates:
             - Path=/carts/**
         - id: customer-service
-          uri: http://localhost:6060
+          uri: lb://customer-service
           predicates:
             - Path=/customers/**
   application:

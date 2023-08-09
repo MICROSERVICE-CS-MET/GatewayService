@@ -13,18 +13,36 @@ spring:
           uri: lb://book-service
           predicates:
             - Path=/books/**
+          filters:
+            - AuthenticationFilter
+
         - id: order-service
           uri: lb://order-service
           predicates:
             - Path=/orders/**
+          filters:
+            - AuthenticationFilter
+
         - id: cart-service
           uri: lb://cart-service
           predicates:
             - Path=/carts/**
+          filters:
+            - AuthenticationFilter
+
         - id: customer-service
           uri: lb://customer-service
           predicates:
             - Path=/customers/**
+          filters:
+            - AuthenticationFilter
+
+        - id: identity-service
+          uri: lb://identity-service
+          predicates:
+           - Path=/users/**
+          filters:
+            - AuthenticationFilter
   application:
     name: gateway-service
 

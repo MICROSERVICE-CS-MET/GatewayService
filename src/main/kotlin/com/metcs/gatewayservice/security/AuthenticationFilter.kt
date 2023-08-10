@@ -5,10 +5,10 @@ import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFac
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
 
-
 @Component
-class AuthenticationFilter(private val validator: RouteValidator,
-                           private val restTemplate: RestTemplate
+class AuthenticationFilter(
+    private val validator: RouteValidator,
+    private val restTemplate: RestTemplate
 ) :
     AbstractGatewayFilterFactory<AuthenticationFilter.Config>(Config::class.java) {
     override fun apply(config: Config): GatewayFilter {
@@ -22,8 +22,10 @@ class AuthenticationFilter(private val validator: RouteValidator,
                     authHeader = authHeader.substring(7)
                 }
                 try {
-                    restTemplate.getForObject("http://localhost:8080/users/validateToken?token=$authHeader",
-                        String::class.java)
+                    restTemplate.getForObject(
+                        "http://localhost:8080/users/validateToken?token=$authHeader",
+                        String::class.java
+                    )
                 } catch (e: Exception) {
                     println("invalid access...!")
                     throw RuntimeException("unauthorized access to application")
@@ -34,5 +36,4 @@ class AuthenticationFilter(private val validator: RouteValidator,
     }
 
     data class Config(var enabled: Boolean = true)
-
 }

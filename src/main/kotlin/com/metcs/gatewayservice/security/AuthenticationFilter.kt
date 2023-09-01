@@ -23,7 +23,7 @@ class AuthenticationFilter(
                 }
                 try {
                     restTemplate.getForObject(
-                        "http://localhost:8080/users/validateToken?token=$authHeader",
+                        "http://localhost:8080/users/validate-token?token=$authHeader",
                         String::class.java
                     )
                 } catch (e: Exception) {
